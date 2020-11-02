@@ -147,9 +147,9 @@ const MyHometask: MyInterface = {
 interface MyArray<T> {
     [N: number]: T;
 
-    reduce<U>(fn: (acc: T, cur: T) => T): U;
+    reduce<U>(fn: (acc: T, val: T,) => T, init: U): U;
 }
 
-const arr: MyArray<number> = [1, 2, 3, 4];
+const arr: Array<number> = [1, 2, 3, 4];
 
 arr.reduce((acc, curr) =>  acc + curr);
