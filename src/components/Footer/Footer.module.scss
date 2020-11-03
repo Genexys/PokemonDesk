@@ -1,0 +1,23 @@
+.footer {
+  display: flex;
+  align-items: center;
+  height: 93px;
+  //background-color: var(--mainYellow);
+  font-family: Karla;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #212121;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+}

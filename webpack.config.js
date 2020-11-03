@@ -4,7 +4,10 @@ const HTMLWebpackPlugins = require("html-webpack-plugin");
 
 module.exports = {
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".scss"],
+    alias: {
+      "~": path.resolve(__dirname, "./src/"),
+    },
   },
   mode: NODE_ENV ? NODE_ENV : "development",
   entry: path.resolve(__dirname, "src/index.ts"),
@@ -29,7 +32,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           "style-loader",
-          "css-modules-typescript-loader?modules",
+          "css-modules-typescript-loader",
           {
             loader: "css-loader",
             options: {
@@ -41,6 +44,14 @@ module.exports = {
             },
           },
           "sass-loader",
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "url-loader",
+          },
         ],
       },
     ],
