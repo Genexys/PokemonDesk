@@ -1,20 +1,23 @@
-import React from 'react';
-import cn from 'classnames';
+import React from "react";
+import cn from "classnames";
+import Menu from "../Menu/Index";
 
-import s from './Header.module.scss';
-import global from '../../App.module.scss';
+import s from "./Header.module.scss";
+import global from "../../App.module.scss";
 
-import { ReactComponent as Logo } from './assets/Logo.svg';
+import logo from "./img/Logo.svg";
 
-const Header = ({ children }) => {
+const items: string[] = ["Home", "Pokedex", "Legendaries", "Documentation"];
+
+const Header = () => {
   return (
     <header className={cn(s.header)}>
       <div className={cn(global.container, s.container)}>
-        <div className={cn(s.logo)}>
-          <Logo />
-        </div>
+        <img src={logo} alt="Pokemon" />
 
-        <nav className={cn()}>{children}</nav>
+        <nav className={cn()}>
+          <Menu items={items} />
+        </nav>
       </div>
     </header>
   );

@@ -1,79 +1,56 @@
-const path = require('path');
+const path = require("path");
 const NODE_ENV = process.env.NODE_ENV;
-const HTMLWebpackPlugins = require('html-webpack-plugin');
+const HTMLWebpackPlugins = require("html-webpack-plugin");
 
 module.exports = {
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss'],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".scss"],
     alias: {
-      '~': path.resolve(__dirname, './src/'),
+      "~": path.resolve(__dirname, "./src/"),
     },
   },
-  mode: NODE_ENV ? NODE_ENV : 'development',
-  entry: path.resolve(__dirname, 'src/index.ts'),
+  mode: NODE_ENV ? NODE_ENV : "development",
+  entry: path.resolve(__dirname, "src/index.ts"),
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "main.js",
   },
   module: {
     rules: [
       {
         test: /\.[tj]sx?$/,
         exclude: /node_modules/,
-        use: ['ts-loader'],
+        use: ["ts-loader"],
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
         use: [
-          'style-loader',
-          'css-modules-typescript-loader',
-          // {
-          //   loader: 'typings-for-css-modules-loader',
-          //   options: {
-          //     modules: true,
-          //     namedExport: true
-          //   }
-          // },
+          "style-loader",
+          "css-modules-typescript-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               modules: {
-                mode: 'local',
-                localIdentName: '[name]__[local]__[hash:base64:5]',
+                mode: "local",
+                localIdentName: "[name]__[local]__[hash:base64:5]",
                 auto: /\.module\.\w+$/i,
               },
             },
           },
-          'sass-loader',
+          "sass-loader",
         ],
       },
       {
         test: /\.svg$/,
-        use: ['@svgr/webpack', 'url-loader'],
-      },
-      {
-        test: [/\.gifs$/, /\.jpe?g$/, /\.png$/],
         use: [
           {
-            loader: 'url-loader',
-          },
-        ],
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-            },
+            loader: "url-loader",
           },
         ],
       },
@@ -81,14 +58,13 @@ module.exports = {
   },
   plugins: [
     new HTMLWebpackPlugins({
-      template: path.resolve(__dirname, 'public/index.html'),
+      template: path.resolve(__dirname, "public/index.html"),
     }),
   ],
   devServer: {
     port: 3000,
     open: true,
     hot: true,
-    historyApiFallback: true,
   },
-  devtool: 'source-map',
+  devtool: "source-map",
 };
