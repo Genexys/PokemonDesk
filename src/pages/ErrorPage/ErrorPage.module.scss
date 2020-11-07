@@ -1,0 +1,13 @@
+.root {
+  background-color: var(--mainRed);
+}
+
+.textError {
+  font-weight: bold;
+  font-size: 700px;
+  line-height: 818px;
+  text-align: center;
+  letter-spacing: 4px;
+  color: rgba(0, 0, 0, 0.5);
+  filter: drop-shadow(4px 4px 24px rgba(1, 17, 38, 0.2));
+}
