@@ -5,7 +5,7 @@ import s from './Button.module.scss';
 
 interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  color?: string | undefined;
+  color?: 'yellow' | 'blue' | undefined;
   size?: 'small' | 'middle' | 'large' | undefined;
   fullWidth?: boolean | undefined;
 }
