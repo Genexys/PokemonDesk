@@ -1,35 +1,23 @@
 import React from 'react';
 import cn from 'classnames';
+import { A, usePath } from 'hookrouter';
 
-import { NavLink } from 'react-router-dom';
+import { MAIN_MENU } from '../../routes';
 
 import s from './Menu.module.scss';
 
 const Menu = () => {
+  const path = usePath();
+
   return (
     <ul className={cn(s.listMenu)}>
-      <li className={cn(s.itemMenu)}>
-        <NavLink
-          to="/"
-          exact
-          activeStyle={{
-            fontWeight: 'bold',
-          }}
-          className={cn(s.itemLink)}>
-          Home
-        </NavLink>
-      </li>
-
-      <li className={cn(s.itemMenu)}>
-        <NavLink
-          to="/pokedex"
-          activeStyle={{
-            fontWeight: 'bold',
-          }}
-          className={cn(s.itemLink)}>
-          Pokédex
-        </NavLink>
-      </li>
+      {MAIN_MENU.map(({ title, link }) => (
+        <li key={title} className={cn(s.itemMenu)}>
+          <A href={link} className={cn(s.itemLink, { [s.selected]: link === path })}>
+            {title}
+          </A>
+        </li>
+      ))}
     </ul>
   );
 };

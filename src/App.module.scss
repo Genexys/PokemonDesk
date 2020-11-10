@@ -1,7 +1,7 @@
 .app {
-  min-height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  min-height: 100%;
   background: linear-gradient(180deg, #f5db13 0%, #f2b807 100%);
   overflow: hidden;
 }

@@ -1,11 +1,4 @@
-import React from 'react';
-import cn from 'classnames';
-
-import Card from '../../components/Card/Card';
-
-import s from './PokedexPage.module.scss';
-
-const pokemons = [
+export const pokemons = [
   {
     name_clean: 'bulbasaur',
     abilities: ['overgrow', 'chlorophyll'],
@@ -217,15 +210,3 @@ const pokemons = [
     weight: 29,
   },
 ];
-
-const PokedexPage = () => {
-  return (
-    <div className={cn(s.PokedexPage)}>
-      {pokemons.map((el) => (
-        <Card key={el.id} data={el} />
-      ))}
-    </div>
-  );
-};
-
-export default PokedexPage;
