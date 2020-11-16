@@ -4,19 +4,24 @@ import PokedexPage from './pages/PokedexPage';
 
 interface IMainMenu {
   title: string;
-  link: string;
+  link: Link;
   component: () => JSX.Element;
+}
+
+export enum Link {
+  HOME = '/',
+  POKEDEX = '/pokedex',
 }
 
 export const MAIN_MENU: IMainMenu[] = [
   {
     title: 'Home',
-    link: '/',
+    link: Link.HOME,
     component: () => <HomePage />,
   },
   {
     title: 'Pokédex',
-    link: '/pokedex',
+    link: Link.POKEDEX,
     component: () => <PokedexPage />,
   },
 ];

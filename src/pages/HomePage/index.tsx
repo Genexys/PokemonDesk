@@ -6,6 +6,8 @@ import Button from '../../components/Button';
 import Parallax from '../../components/Parallax';
 import Heading from '../../components/Heading';
 
+import { Link } from '../../routes';
+
 import s from './MainScreen.module.scss';
 
 const HomePage = () => {
@@ -21,7 +23,7 @@ const HomePage = () => {
           You can know the type of Pokemon, its strengths, disadvantages and abilities
         </h2>
 
-        <Button onClick={(e) => navigate('/pokedex')}>See pokemons</Button>
+        <Button onClick={(e) => navigate(Link.POKEDEX)}>See pokemons</Button>
       </div>
 
       <div className={cn(s.parallaxContent)}>

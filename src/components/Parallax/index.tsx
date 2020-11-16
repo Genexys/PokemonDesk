@@ -28,7 +28,7 @@ const Parallax = () => {
       <div
         className={cn(s.smallPokeball)}
         style={{
-          transform: `translate(${screenY * 0.04}px, ${screenY * 0.04}px)`,
+          transform: `translate(-${screenY * 0.04}px, ${screenY * 0.04}px)`,
         }}>
         <Smallpokeball />
       </div>
@@ -44,7 +44,7 @@ const Parallax = () => {
       <div
         className={cn(s.cloudBig)}
         style={{
-          transform: `translateX(-${screenX * 0.05}px)`,
+          transform: `translateX(${screenX * 0.04}px)`,
         }}>
         <BigCloud />
       </div>

@@ -4,6 +4,8 @@ import { navigate } from 'hookrouter';
 
 import Button from '../../components/Button';
 
+import { Link } from '../../routes';
+
 import s from './ErrorPage.module.scss';
 import global from '../../App.module.scss';
 
@@ -13,7 +15,7 @@ const ErrorPage = () => {
       <div className={cn(global.container)}>
         <span className={cn(s.textError)}>404</span>
 
-        <Button onClick={(e) => navigate('/')} color="yellow">
+        <Button onClick={(e) => navigate(Link.HOME)} color="yellow">
           Return
         </Button>
       </div>
