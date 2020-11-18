@@ -1,6 +1,5 @@
 import React from 'react';
 import cn from 'classnames';
-
 import { useRoutes } from 'hookrouter';
 import routes from './routes';
 

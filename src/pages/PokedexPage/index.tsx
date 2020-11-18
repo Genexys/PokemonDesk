@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import cn from 'classnames';
-import axios from 'axios';
 
 import Card from '../../components/Card/Card';
-import PokebolLoader from '../../components/PokebolLoader';
+import PokeballLoader from '../../components/PokeballLoader';
+import Search from '../../components/Search/Search';
 
 import s from './PokedexPage.module.scss';
+import useData from '../../hook/getData';
 
 interface IPokemonsData {
   ['name_clean']: string;
@@ -29,48 +30,14 @@ interface IData {
   pokemons: IPokemonsData[];
 }
 
-interface IUsePokemons {
-  data: IData;
-  isLoading: boolean;
-  isError: boolean;
-}
-
-const usePokemons = (): IUsePokemons => {
-  const [data, setData] = useState<IData>({ total: 0, pokemons: [] });
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      try {
-        const res = await axios.get(`http://zar.hosthot.ru/api/v1/pokemons?limit=100`);
-        const dataRes = await res;
-
-        if (dataRes.status === 200) {
-          setData(dataRes.data);
-          setIsLoading(false);
-        }
-      } catch (err) {
-        setIsError(true);
-      } finally {
-        setIsError(false);
-      }
-    })();
-  }, []);
-
-  return {
-    data,
-    isLoading,
-    isError,
-  };
-};
-
 const PokedexPage = () => {
-  const { data, isLoading, isError } = usePokemons();
+  const [value, setValue] = useState('');
+  const [query, setQuery] = useState({});
+
+  const { data, isLoading, isError } = useData<IData>('getPokemons', query, [value]);
 
   if (isLoading) {
-    return <PokebolLoader />;
+    return <PokeballLoader />;
   }
 
   if (isError) {
@@ -80,13 +47,13 @@ const PokedexPage = () => {
   return (
     <div className={cn(s.PokedexPage)}>
       <span className={cn(s.pokedexTitle)}>
-        {data.total} <span>Pokemons</span> for you to choose your favorite
+        {!isLoading && data && data.total} <span>Pokemons</span> for you to choose your favorite
       </span>
 
+      <Search valueSearch={setValue} valueQuery={setQuery} />
+
       <ul className={cn(s.pokemonsList)}>
-        {data.pokemons.map((el) => (
-          <Card key={el.id} data={el} />
-        ))}
+        {!isLoading && data && data.pokemons.map((el) => <Card key={el.id} data={el} />)}
       </ul>
     </div>
   );

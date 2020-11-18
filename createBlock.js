@@ -47,8 +47,7 @@ if (blockName) {
 
         // Если это JS
         else if (extention == 'tsx') {
-          fileContent =
-            "import React from 'react';\n const MyComponent = () => { \n return (\n <div>\n </div>\n );\n };\n export default MyComponent;\n ";
+          fileContent = `import React from 'react';\n import s from '.\/${blockName}.module.scss';\n\n const ${blockName} = () => { \n return (\n <div>\n </div>\n );\n };\n export default ${blockName};\n`;
         }
 
         // Создаем файл, если он еще не существует
