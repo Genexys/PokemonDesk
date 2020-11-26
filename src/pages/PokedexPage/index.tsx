@@ -1,40 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import Card from '../../components/Card/Card';
 import PokeballLoader from '../../components/PokeballLoader';
 import Search from '../../components/Search/Search';
 
-import s from './PokedexPage.module.scss';
+import useDebounce from '../../config/useDebounce';
 import useData from '../../hook/getData';
+import IData, { PokemonsRequest } from '../../interface/pokemons';
 
-interface IPokemonsData {
-  ['name_clean']: string;
-  abilities: string[];
-  stats: {
-    [n: string]: number;
-  };
-  types: string[];
-  img: string;
-  name: string;
-  ['base_experience']: number;
-  height: number;
-  id: number | null;
-  ['is_default']: boolean;
-  order: number;
-  weight: number;
-}
+import s from './PokedexPage.module.scss';
 
-interface IData {
-  total: number;
-  pokemons: IPokemonsData[];
+interface IQuery {
+  name?: string;
 }
 
 const PokedexPage = () => {
   const [value, setValue] = useState('');
-  const [query, setQuery] = useState({});
+  const [query, setQuery] = useState<IQuery>({});
+  const debouncedValue = useDebounce(value, 500);
+  const { data, isLoading, isError } = useData<IData>('getPokemons', query, [debouncedValue]);
 
-  const { data, isLoading, isError } = useData<IData>('getPokemons', query, [value]);
+  useEffect(() => {}, [debouncedValue]);
 
   if (isLoading) {
     return <PokeballLoader />;
@@ -53,7 +40,7 @@ const PokedexPage = () => {
       <Search valueSearch={setValue} valueQuery={setQuery} />
 
       <ul className={cn(s.pokemonsList)}>
-        {!isLoading && data && data.pokemons.map((el) => <Card key={el.id} data={el} />)}
+        {!isLoading && data && data.pokemons.map((el: PokemonsRequest) => <Card key={el.id} data={el} />)}
       </ul>
     </div>
   );
