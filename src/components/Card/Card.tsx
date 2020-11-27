@@ -2,6 +2,8 @@ import React, { CSSProperties } from 'react';
 import cn from 'classnames';
 import Heading from '../Heading';
 
+import toCapitalizeFirstLetter from '../../utils/toCapitalizeFirstLetter';
+
 import s from './Card.module.scss';
 
 type BGTypes = {
@@ -44,7 +46,7 @@ const Card = ({ data }) => {
       <div className={s.infoWrap}>
         <div className={s.titleName}>
           <Heading sizeTitle="h3" className="h3">
-            {data.name}
+            {toCapitalizeFirstLetter(data.name)}
           </Heading>
         </div>
         <div className={s.statWrap}>
