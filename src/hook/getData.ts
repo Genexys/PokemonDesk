@@ -7,7 +7,7 @@ const useData = <T>(endpoint: string, query: object, deps: any[] = []) => {
   const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
-    (async () => {
+    (async (): Promise<void> => {
       setIsLoading(true);
       try {
         const res = await req(endpoint, query);
